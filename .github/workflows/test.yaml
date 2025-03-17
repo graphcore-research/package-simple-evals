@@ -39,6 +39,6 @@ jobs:
       run: |
         uv venv .venv-from-git
         source .venv-from-git/bin/activate
-        uv pip install git+https://github.com/graphcore-research/package-simple-evals.git@${{ github.sha }}[dev]
+        uv pip install git+https://${GITHUB_TOKEN}@github.com/graphcore-research/package-simple-evals.git@${{ github.sha }}[dev]
         pytest tests/
 
