@@ -31,3 +31,11 @@ jobs:
     - name: Run tests
       run: |
         uv run --dev -- pytest tests/
+    
+    - name: Run tests from a git requirement
+      run: |
+        uv venv .venv-from-git
+        source .venv-from-git/bin/activate
+        uv pip install git+https://github.com/graphcore-research/package-simple-evals.git@${{ github.sha }}[dev]
+        pytest tests/
+
