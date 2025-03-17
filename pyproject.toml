@@ -24,27 +24,35 @@ dependencies = [
     "requests",
     "jinja2",
     "scipy",
+    "fire",  # Required for human-eval
 ]
 
 [project.optional-dependencies]
 openai = ["openai>=1.0.0"]
 anthropic = ["anthropic>=0.5.0"]
-humaneval = ["human-eval @ git+https://github.com/openai/human-eval.git"]
 
 [project.scripts]
 simple_evals = "simple_evals:main"
+# The script will be provided by human-eval package after our patch
 
+# Define multiple packages in the same project
 [tool.setuptools]
-packages = ["simple_evals", "simple_evals.sampler"]
-# Include all non-Python files in the package
+# Explicitly list all packages
+packages = ["simple_evals", "simple_evals.sampler", "human_eval"]
 include-package-data = true
+
+# Package directory mapping - specifies where to find each package
+[tool.setuptools.package-dir]
+"human_eval" = "human-eval/human_eval"
 
 [tool.setuptools.dynamic]
 version = {attr = "simple_evals.__version__"}
 
 [tool.setuptools.package-data]
 "simple_evals" = ["**/*.json", "**/*.jsonl", "**/*.csv", "**/*.txt"]
+"human_eval" = ["**/*.json", "**/*.txt"]
 
-# Custom build step to run our setup script
+# Custom build and install steps
 [tool.setuptools.cmdclass]
-build_py = "build.BuildCommand" 
+build_py = "build.BuildCommand"
+# install = "build.InstallCommand"
