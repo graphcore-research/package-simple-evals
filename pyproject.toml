@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "simple-evals"
 version = "0.1.0"
-description = "A lightweight library for evaluating language models"
+description = "A wrapper to make OpenAI's simple_evals and human_eval installable with pip and UV"
 readme = "simple-evals/README.md"
 authors = [
     {name = "Graphcore Research", email = "info@graphcore.ai"}
@@ -25,11 +25,11 @@ dependencies = [
     "jinja2",
     "scipy",
     "fire",  # Required for human-eval
+    "openai>=1.0.0",
+    "anthropic>=0.5.0",
 ]
 
 [project.optional-dependencies]
-openai = ["openai>=1.0.0"]
-anthropic = ["anthropic>=0.5.0"]
 dev = [
     "pytest>=7.0.0",
     "pytest-cov>=2.12.0",
@@ -37,18 +37,15 @@ dev = [
 
 [project.scripts]
 simple_evals = "simple_evals:main"
-# The script will be provided by human-eval package after our patch
 
-# Define multiple packages in the same project
 [tool.setuptools]
-# Explicitly list all packages
-packages = ["simple_evals", "simple_evals.sampler", "human_eval", "data"]
+# Define multiple packages in the same project
+packages = ["simple_evals", "simple_evals.sampler", "human_eval"]
 include-package-data = true
 
-# Package directory mapping - specifies where to find each package
 [tool.setuptools.package-dir]
 "human_eval" = "human-eval/human_eval"
-"data" = "human-eval/data"  # Map the data directory
+# "data" = "human-eval/data"  # Map the data directory
 
 [tool.setuptools.dynamic]
 version = {attr = "simple_evals.__version__"}
@@ -56,7 +53,7 @@ version = {attr = "simple_evals.__version__"}
 [tool.setuptools.package-data]
 "simple_evals" = ["**/*.json", "**/*.jsonl", "**/*.csv", "**/*.txt"]
 "human_eval" = ["**/*.json", "**/*.txt", "**/*.py"]
-"data" = ["**/*.jsonl.gz", "**/*.json"]  # Include data files
+# "data" = ["**/*.jsonl.gz", "**/*.json"]  # Include data files in human-eval/data
 
 # Custom build and install steps
 [tool.setuptools.cmdclass]
