@@ -30,6 +30,10 @@ dependencies = [
 [project.optional-dependencies]
 openai = ["openai>=1.0.0"]
 anthropic = ["anthropic>=0.5.0"]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=2.12.0",
+]
 
 [project.scripts]
 simple_evals = "simple_evals:main"
@@ -38,21 +42,28 @@ simple_evals = "simple_evals:main"
 # Define multiple packages in the same project
 [tool.setuptools]
 # Explicitly list all packages
-packages = ["simple_evals", "simple_evals.sampler", "human_eval"]
+packages = ["simple_evals", "simple_evals.sampler", "human_eval", "data"]
 include-package-data = true
 
 # Package directory mapping - specifies where to find each package
 [tool.setuptools.package-dir]
 "human_eval" = "human-eval/human_eval"
+"data" = "human-eval/data"  # Map the data directory
 
 [tool.setuptools.dynamic]
 version = {attr = "simple_evals.__version__"}
 
 [tool.setuptools.package-data]
 "simple_evals" = ["**/*.json", "**/*.jsonl", "**/*.csv", "**/*.txt"]
-"human_eval" = ["**/*.json", "**/*.txt"]
+"human_eval" = ["**/*.json", "**/*.txt", "**/*.py"]
+"data" = ["**/*.jsonl.gz", "**/*.json"]  # Include data files
 
 # Custom build and install steps
 [tool.setuptools.cmdclass]
 build_py = "build.BuildCommand"
 # install = "build.InstallCommand"
+
+# Pytest configuration
+[tool.pytest]
+testpaths = ["tests"]
+python_files = "test_*.py"
