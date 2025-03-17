@@ -1,0 +1,17 @@
+# Ignore python files in simple_evals which get copied in the build process
+simple_evals/**/*.py
+!simple_evals/**/__init__.py
+
+# Ignore all files in the .venv directory
+.venv/
+.venv
+
+
+# Ignore all files in the .pytest_cache directory
+.pytest_cache/
+__pycache__/
+build/
+dist/
+*.egg-info
+*.egg
+*.dist-info
