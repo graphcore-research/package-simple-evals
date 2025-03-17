@@ -25,23 +25,23 @@ dependencies = [
     "jinja2",
     "scipy",
     "fire",  # Required for human-eval
+    "openai>=1.0.0",
+    "anthropic>=0.5.0",
 ]
 
-[project.optional-dependencies]
-openai = ["openai>=1.0.0"]
-anthropic = ["anthropic>=0.5.0"]
-dev = [
+[tool.uv]
+
+dev-dependencies = [
+    "pre-commit>=4.0.1",
     "pytest>=7.0.0",
-    "pytest-cov>=2.12.0",
+    "pytest-cov>=6",
 ]
 
 [project.scripts]
 simple_evals = "simple_evals:main"
-# The script will be provided by human-eval package after our patch
 
-# Define multiple packages in the same project
 [tool.setuptools]
-# Explicitly list all packages
+# Need to install human-eval as well as simple_evals
 packages = ["simple_evals", "simple_evals.sampler", "human_eval", "data"]
 include-package-data = true
 
