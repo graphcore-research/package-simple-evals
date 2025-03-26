@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Graphcore Ltd. All rights reserved.
 #!/usr/bin/env python3
 """
 Script to set up the simple_evals package by copying files from the simple-evals submodule.

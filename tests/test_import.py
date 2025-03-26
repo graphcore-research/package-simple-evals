@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Graphcore Ltd. All rights reserved.
 """
 Test script for importing simple_evals
 """

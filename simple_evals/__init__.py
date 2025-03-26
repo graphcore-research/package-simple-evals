@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Graphcore Ltd. All rights reserved.
 """
 simple_evals - A lightweight library for evaluating language models.
 """

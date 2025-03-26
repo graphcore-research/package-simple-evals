@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Graphcore Ltd. All rights reserved.
 """
 Custom build command for setuptools to run our package setup script.
 """

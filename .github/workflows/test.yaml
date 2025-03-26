@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Graphcore Ltd. All rights reserved.
 
 name: Run Tests
 
@@ -34,11 +35,10 @@ jobs:
     - name: Run tests
       run: |
         uv run --dev -- pytest tests/
-    
+
     - name: Run tests from a git requirement
       run: |
         uv venv .venv-from-git
         source .venv-from-git/bin/activate
         uv pip install git+https://${{ github.actor }}:${{ github.token }}@github.com/graphcore-research/package-simple-evals.git@${{ github.sha }}[dev]
         pytest tests/
-
